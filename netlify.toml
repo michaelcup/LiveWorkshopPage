@@ -1,0 +1,24 @@
+# Netlify Configuration File
+
+[build]
+  # No build command needed for static site
+  publish = "."
+  functions = "netlify/functions"
+
+# Redirect rules (optional)
+[[redirects]]
+  from = "/workshop"
+  to = "/workshop.html"
+  status = 200
+
+# Environment variables are set in Netlify UI
+# Don't put secrets here - this file goes in Git
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

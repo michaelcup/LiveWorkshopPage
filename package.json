@@ -1,0 +1,13 @@
+{
+  "name": "paradox-process-website",
+  "version": "1.0.0",
+  "description": "Paradox Process website with Keap integration",
+  "private": true,
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"No tests configured\" && exit 0"
+  }
+}

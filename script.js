@@ -234,60 +234,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            // Submit to Keap
-            // You'll need to set up a web form in Keap and get the submission URL
-            // Go to Keap > Marketing > Landing Pages > Web Forms
-            const keapEndpoint = isWorkshopForm
-                ? 'YOUR_KEAP_WORKSHOP_FORM_URL' // Replace with your Keap workshop form URL
-                : 'YOUR_KEAP_CORPORATE_FORM_URL'; // Replace with your Keap corporate form URL
-
-            // Prepare Keap-compatible form data
-            const keapFormData = new FormData();
-
-            // Standard Keap fields (adjust field names to match your Keap form)
-            keapFormData.append('inf_field_FirstName', data.name.split(' ')[0] || data.name);
-            keapFormData.append('inf_field_LastName', data.name.split(' ').slice(1).join(' ') || '');
-            keapFormData.append('inf_field_Email', data.email);
-
-            if (isWorkshopForm) {
-                // Workshop-specific fields
-                if (data.role && data.role.length > 0) {
-                    keapFormData.append('inf_custom_Role', data.role.join(', '));
-                }
-                if (data.questions) {
-                    keapFormData.append('inf_custom_Questions', data.questions);
-                }
-                // Add a tag to identify workshop registrants
-                keapFormData.append('inf_field_Tag', 'Workshop Registration - Dec 10');
-            } else {
-                // Corporate form-specific fields
-                if (data.organization) {
-                    keapFormData.append('inf_field_Company', data.organization);
-                }
-                if (data.interest && data.interest.length > 0) {
-                    keapFormData.append('inf_custom_Interest', data.interest.join(', '));
-                }
-                if (data.challenges) {
-                    keapFormData.append('inf_custom_Challenges', data.challenges);
-                }
-                if (data['contact-method'] && data['contact-method'].length > 0) {
-                    keapFormData.append('inf_custom_PreferredContact', data['contact-method'].join(', '));
-                }
-                if (data.phone) {
-                    keapFormData.append('inf_field_Phone1', data.phone);
-                }
-                // Add a tag to identify corporate leads
-                keapFormData.append('inf_field_Tag', 'Corporate Contact Form');
-            }
-
-            await fetch(keapEndpoint, {
+            // Submit to Keap via Netlify Function
+            const response = await fetch('/.netlify/functions/keap-submit', {
                 method: 'POST',
-                body: keapFormData,
-                mode: 'no-cors' // Keap forms typically require this
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             });
 
-            // Note: With no-cors mode, we can't read the response
-            // We'll assume success if no error was thrown
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || 'Form submission failed');
+            }
 
             // Show success message
             formSuccess.style.display = 'block';

@@ -1,0 +1,29 @@
+# Local Netlify folder
+.netlify
+
+# Environment variables (NEVER commit these!)
+.env
+.env.local
+.env.*.local
+
+# PHP files (not needed for Netlify)
+keap-submit.php
+keap-submit-v2.php
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
