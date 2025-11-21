@@ -80,7 +80,8 @@ exports.handler = async (event, context) => {
           email: data.email,
           field: 'EMAIL1'
         }
-      ]
+      ],
+      opt_in_reason: 'Workshop registration form - December 10th Live Workshop'
     };
 
     // Add custom fields if provided
