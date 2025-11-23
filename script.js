@@ -306,30 +306,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Sticky Navigation on Scroll
-document.addEventListener('DOMContentLoaded', function() {
-    const stickyNav = document.getElementById('sticky-nav');
-    const header = document.querySelector('header');
-    let lastScroll = 0;
-    let headerHeight = 0;
-
-    // Calculate header height after page loads
-    setTimeout(() => {
-        headerHeight = header ? header.offsetHeight : 500;
-    }, 100);
-
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Show sticky nav after scrolling past the header
-        if (currentScroll > headerHeight && currentScroll > lastScroll) {
-            // Scrolling down and past header
-            stickyNav.classList.add('show');
-        } else if (currentScroll < headerHeight) {
-            // Scrolled back to top
-            stickyNav.classList.remove('show');
-        }
-
-        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-    });
-});
+// Sticky Navigation - Always visible (no scroll behavior needed)
+// The sticky nav is now always visible at the top of the page
