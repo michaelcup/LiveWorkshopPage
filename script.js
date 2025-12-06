@@ -12,12 +12,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Validation functions
     const validators = {
-        name: function(value) {
+        'first-name': function(value) {
             if (!value.trim()) {
-                return 'Please enter your name';
+                return 'Please enter your first name';
             }
             if (value.trim().length < 2) {
-                return 'Name must be at least 2 characters';
+                return 'First name must be at least 2 characters';
+            }
+            return null;
+        },
+        'last-name': function(value) {
+            if (!value.trim()) {
+                return 'Please enter your last name';
+            }
+            if (value.trim().length < 2) {
+                return 'Last name must be at least 2 characters';
             }
             return null;
         },
@@ -101,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Real-time validation for text inputs
-    ['name', 'organization', 'email'].forEach(fieldName => {
+    ['first-name', 'last-name', 'organization', 'email'].forEach(fieldName => {
         const field = document.getElementById(fieldName);
         if (field) {
             field.addEventListener('blur', function() {
@@ -160,8 +169,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Validate required text fields based on form type
         const requiredFields = isWorkshopForm
-            ? ['name', 'email']
-            : ['name', 'organization', 'email'];
+            ? ['first-name', 'last-name', 'email']
+            : ['first-name', 'last-name', 'organization', 'email'];
 
         requiredFields.forEach(fieldName => {
             const field = document.getElementById(fieldName);
@@ -296,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 // Focus on first form field for accessibility
                 setTimeout(() => {
-                    const firstField = document.getElementById('name');
+                    const firstField = document.getElementById('first-name');
                     if (firstField) {
                         firstField.focus();
                     }
@@ -308,3 +317,128 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Sticky Navigation - Always visible (no scroll behavior needed)
 // The sticky nav is now always visible at the top of the page
+
+// Countdown Timer
+document.addEventListener('DOMContentLoaded', function() {
+    const countdownContainer = document.getElementById('countdown-container');
+    if (!countdownContainer) return;
+
+    // Workshop date: December 10th, 2025 at 8:00 PM EST
+    const workshopDate = new Date('2025-12-10T20:00:00-05:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = workshopDate - now;
+
+        // If the countdown is finished
+        if (distance < 0) {
+            document.getElementById('countdown-days').textContent = '00';
+            document.getElementById('countdown-hours').textContent = '00';
+            document.getElementById('countdown-minutes').textContent = '00';
+            document.getElementById('countdown-seconds').textContent = '00';
+            document.querySelector('.countdown-label').textContent = 'Workshop is Live!';
+            return;
+        }
+
+        // Calculate time units
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Update the display with leading zeros
+        document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Update immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+});
+
+// Tab Interface
+document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    if (tabButtons.length === 0) return;
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Get the target panel ID
+            const targetId = this.getAttribute('aria-controls');
+
+            // Update button states
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
+
+            // Update panel visibility
+            tabPanels.forEach(panel => {
+                panel.classList.remove('active');
+                panel.setAttribute('hidden', '');
+            });
+
+            const targetPanel = document.getElementById(targetId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+                targetPanel.removeAttribute('hidden');
+            }
+        });
+
+        // Keyboard navigation
+        button.addEventListener('keydown', function(e) {
+            const buttons = Array.from(tabButtons);
+            const currentIndex = buttons.indexOf(this);
+
+            let newIndex;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                newIndex = (currentIndex + 1) % buttons.length;
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                newIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                newIndex = 0;
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                newIndex = buttons.length - 1;
+            }
+
+            if (newIndex !== undefined) {
+                buttons[newIndex].focus();
+                buttons[newIndex].click();
+            }
+        });
+    });
+});
+
+// Scroll Reveal Animation
+document.addEventListener('DOMContentLoaded', function() {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+    if (revealElements.length === 0) return;
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                // Optionally stop observing after reveal
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(element => {
+        revealObserver.observe(element);
+    });
+});

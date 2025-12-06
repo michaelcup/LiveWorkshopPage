@@ -48,11 +48,11 @@ exports.handler = async (event, context) => {
     const data = JSON.parse(event.body);
 
     // Validate required fields
-    if (!data.name || !data.email) {
+    if (!data['first-name'] || !data['last-name'] || !data.email) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, message: 'Name and email are required' })
+        body: JSON.stringify({ success: false, message: 'First name, last name, and email are required' })
       };
     }
 
@@ -67,14 +67,10 @@ exports.handler = async (event, context) => {
     }
 
     // Prepare contact data for Keap REST API v1
-    const nameParts = data.name.split(' ');
-    const firstName = nameParts[0];
-    const lastName = nameParts.slice(1).join(' ') || '';
-
     // Build contact object for Keap v1 API
     const contactData = {
-      given_name: firstName,
-      family_name: lastName,
+      given_name: data['first-name'].trim(),
+      family_name: data['last-name'].trim(),
       email_addresses: [
         {
           email: data.email,

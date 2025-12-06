@@ -88,11 +88,47 @@
 
     <!-- Header -->
     <header role="banner">
+        <!-- Animated background shapes -->
+        <div class="header-shapes" aria-hidden="true">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+
         <div class="container">
             <div class="logo" aria-label="The Paradox Process Logo"></div>
             <h1>Unlock Transformational Breakthroughs</h1>
             <p class="subtitle">A Free Live Workshop Demonstration for Seekers, Therapists, Coaches, Healers & Wellness Practitioners</p>
-            <p style="font-size: 1.3em; margin-top: 20px; font-weight: 600;">December 10th • 8:00 PM EST • Live on Zoom</p>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-container" id="countdown-container">
+                <p class="countdown-label">Workshop Starts In:</p>
+                <div class="countdown-timer" id="countdown-timer">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="countdown-days">00</span>
+                        <span class="countdown-unit">Days</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="countdown-hours">00</span>
+                        <span class="countdown-unit">Hours</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="countdown-minutes">00</span>
+                        <span class="countdown-unit">Min</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="countdown-seconds">00</span>
+                        <span class="countdown-unit">Sec</span>
+                    </div>
+                </div>
+                <p class="countdown-date">December 10th • 8:00 PM EST • Live on Zoom</p>
+            </div>
+
+            <a href="#registration-form" class="cta-button header-cta">Save Your Free Spot</a>
         </div>
     </header>
 
@@ -121,98 +157,102 @@
         <div class="container">
             <h2 id="experience-heading" style="text-align: center;">What You'll Experience in This Free Workshop</h2>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <span class="iconify" data-icon="lucide:lightbulb" data-width="48" data-height="48"></span>
+            <!-- Tabbed Interface -->
+            <div class="experience-tabs">
+                <div class="tab-buttons" role="tablist" aria-label="Workshop experience categories">
+                    <button class="tab-button active" role="tab" aria-selected="true" aria-controls="tab-learn" id="btn-learn">
+                        <span class="iconify" data-icon="lucide:book-open" data-width="24" data-height="24"></span>
+                        <span>Learn</span>
+                    </button>
+                    <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-experience" id="btn-experience">
+                        <span class="iconify" data-icon="lucide:eye" data-width="24" data-height="24"></span>
+                        <span>Experience</span>
+                    </button>
+                    <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-discover" id="btn-discover">
+                        <span class="iconify" data-icon="lucide:compass" data-width="24" data-height="24"></span>
+                        <span>Discover</span>
+                    </button>
+                    <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-next" id="btn-next">
+                        <span class="iconify" data-icon="lucide:arrow-right-circle" data-width="24" data-height="24"></span>
+                        <span>Next Steps</span>
+                    </button>
                 </div>
-                <h3>Understand What The Paradox Process is and Why it Works</h3>
-                <p>Discover the emotional technology behind the method and how it rewires the emotional charge that keeps you (or your clients) stuck.</p>
-            </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <span class="iconify" data-icon="lucide:eye" data-width="48" data-height="48"></span>
-                </div>
-                <h3>See a Live Demo of the Process in Action</h3>
-                <p>Watch Thomas guide a real transformation so you can feel how quickly emotional shifts happen.</p>
-            </div>
+                <div class="tab-panels">
+                    <!-- Learn Panel -->
+                    <div class="tab-panel active" role="tabpanel" id="tab-learn" aria-labelledby="btn-learn">
+                        <div class="tab-content-grid">
+                            <div class="tab-card">
+                                <div class="tab-card-icon">
+                                    <span class="iconify" data-icon="lucide:lightbulb" data-width="40" data-height="40"></span>
+                                </div>
+                                <h3>What The Paradox Process Is</h3>
+                                <p>Discover the emotional technology behind the method and how it rewires the emotional charge that keeps you (or your clients) stuck.</p>
+                            </div>
+                            <div class="tab-card">
+                                <div class="tab-card-icon">
+                                    <span class="iconify" data-icon="lucide:brain" data-width="40" data-height="40"></span>
+                                </div>
+                                <h3>Why Traditional Mindset Work Isn't Enough</h3>
+                                <p>Find out why affirmations, journaling, and cognitive reframes can only take you so far and what actually creates embodied, lasting change.</p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <span class="iconify" data-icon="lucide:brain" data-width="48" data-height="48"></span>
-                </div>
-                <h3>Learn Why Traditional Mindset Work Isn't Enough</h3>
-                <p>Find out why affirmations, journaling, and cognitive reframes can only take you so far and what actually creates embodied, lasting change.</p>
-            </div>
+                    <!-- Experience Panel -->
+                    <div class="tab-panel" role="tabpanel" id="tab-experience" aria-labelledby="btn-experience" hidden>
+                        <div class="tab-content-grid">
+                            <div class="tab-card">
+                                <div class="tab-card-icon">
+                                    <span class="iconify" data-icon="lucide:play-circle" data-width="40" data-height="40"></span>
+                                </div>
+                                <h3>Live Demo in Action</h3>
+                                <p>Watch Thomas guide a real transformation so you can feel how quickly emotional shifts happen.</p>
+                            </div>
+                            <div class="tab-card">
+                                <div class="tab-card-icon">
+                                    <span class="iconify" data-icon="lucide:users" data-width="40" data-height="40"></span>
+                                </div>
+                                <h3>Practitioner Integration</h3>
+                                <p>Learn how people integrate The Paradox Process into somatic practices, talk therapy, coaching frameworks, energy work, trauma-informed approaches, breathwork, and personal healing journeys.</p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <span class="iconify" data-icon="lucide:users" data-width="48" data-height="48"></span>
-                </div>
-                <h3>Explore How Practitioners Use This Tool in Their Sessions</h3>
-                <p>Learn how people integrate The Paradox Process into:</p>
+                    <!-- Discover Panel -->
+                    <div class="tab-panel" role="tabpanel" id="tab-discover" aria-labelledby="btn-discover" hidden>
+                        <div class="tab-content-grid">
+                            <div class="tab-card">
+                                <div class="tab-card-icon">
+                                    <span class="iconify" data-icon="lucide:target" data-width="40" data-height="40"></span>
+                                </div>
+                                <h3>Who This Is For</h3>
+                                <p>People navigating anxiety & spiraling, emotional overwhelm, relationship challenges, creative blocks, life transitions, self-sabotage, recurring patterns, and inner resistance.</p>
+                            </div>
+                            <div class="tab-card">
+                                <div class="tab-card-icon">
+                                    <span class="iconify" data-icon="lucide:sparkles" data-width="40" data-height="40"></span>
+                                </div>
+                                <h3>Benefits You'll Experience</h3>
+                                <p>People report rapid shifts in emotional clarity, confidence, decision-making, internal peace, creative flow, self-trust, motivation, and freedom from old patterns.</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="workshop-topics">
-                    <ul>
-                        <li>Somatic practices</li>
-                        <li>Talk therapy</li>
-                        <li>Coaching frameworks</li>
-                        <li>Energy work</li>
-                        <li>Trauma-informed approaches</li>
-                        <li>Breathwork</li>
-                        <li>Personal healing journeys</li>
-                    </ul>
+                    <!-- Next Steps Panel -->
+                    <div class="tab-panel" role="tabpanel" id="tab-next" aria-labelledby="btn-next" hidden>
+                        <div class="tab-content-single">
+                            <div class="tab-card large">
+                                <div class="tab-card-icon">
+                                    <span class="iconify" data-icon="lucide:award" data-width="48" data-height="48"></span>
+                                </div>
+                                <h3>Path to Certification</h3>
+                                <p>At the end, you'll hear more about Paradox Fundamentals — the first step toward certification if you're drawn to using this work professionally.</p>
+                                <p class="tab-card-note">Many join this workshop solely for their own healing — certification is completely optional.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <span class="iconify" data-icon="lucide:target" data-width="48" data-height="48"></span>
-                </div>
-                <h3>Understand Who This Is For</h3>
-                <p>Get clear on who benefits most from this method — including people navigating:</p>
-
-                <div class="workshop-topics">
-                    <ul>
-                        <li>Anxiety & spiraling</li>
-                        <li>Emotional overwhelm</li>
-                        <li>Relationship challenges</li>
-                        <li>Creative blocks</li>
-                        <li>Life transitions</li>
-                        <li>Self-sabotage & procrastination</li>
-                        <li>Recurring patterns</li>
-                        <li>Inner resistance</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <span class="iconify" data-icon="lucide:sparkles" data-width="48" data-height="48"></span>
-                </div>
-                <h3>Discover the Benefits You'll Experience</h3>
-
-                <div class="workshop-topics">
-                    <h4>People report rapid shifts in:</h4>
-                    <ul>
-                        <li>Emotional clarity</li>
-                        <li>Confidence</li>
-                        <li>Decision-making</li>
-                        <li>Internal peace</li>
-                        <li>Creative flow</li>
-                        <li>Self-trust</li>
-                        <li>Motivation</li>
-                        <li>Freedom from old patterns</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <span class="iconify" data-icon="lucide:award" data-width="48" data-height="48"></span>
-                </div>
-                <h3>Learn About the Path to Certification</h3>
-                <p>At the end, you'll hear more about Paradox Fundamentals —  the first step toward certification if you're drawn to using this work professionally (many join this workshop solely for their own healing).</p>
             </div>
         </div>
     </section>
@@ -266,97 +306,130 @@
 
     <!-- Who Is This For -->
     <section class="bg-white">
-        <div class="container-narrow">
-            <h2>Who This Workshop Is For</h2>
-            <p style="font-size: 1.2em; margin-bottom: 30px;">This workshop is designed for both personal growth seekers and practitioners:</p>
+        <div class="container">
+            <h2 style="text-align: center;">Who This Workshop Is For</h2>
+            <p style="font-size: 1.2em; margin-bottom: 50px; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">This workshop is designed for both personal growth seekers and practitioners:</p>
 
-            <h3 style="font-size: 1.5em; margin-bottom: 20px; margin-top: 30px;">Perfect for individuals who want to…</h3>
-            <div class="custom-programs" style="margin-bottom: 40px;">
-                <ul>
-                    <li>Break long-standing emotional patterns</li>
-                    <li>Stop spiraling or overthinking</li>
-                    <li>Move through transitions with clarity</li>
-                    <li>Access deeper self-awareness</li>
-                    <li>Feel more grounded, empowered, and emotionally free</li>
-                    <li>Learn a tool that supports emotional resilience anytime</li>
-                </ul>
+            <div class="persona-grid">
+                <!-- Seekers Card -->
+                <div class="persona-card reveal-on-scroll">
+                    <div class="persona-icon">
+                        <span class="iconify" data-icon="lucide:heart" data-width="48" data-height="48"></span>
+                    </div>
+                    <h3>Personal Growth Seekers</h3>
+                    <p class="persona-subtitle">Perfect for individuals who want to:</p>
+                    <ul class="persona-list">
+                        <li><span class="iconify" data-icon="lucide:check" data-width="18" data-height="18"></span> Break long-standing emotional patterns</li>
+                        <li><span class="iconify" data-icon="lucide:check" data-width="18" data-height="18"></span> Stop spiraling or overthinking</li>
+                        <li><span class="iconify" data-icon="lucide:check" data-width="18" data-height="18"></span> Move through transitions with clarity</li>
+                        <li><span class="iconify" data-icon="lucide:check" data-width="18" data-height="18"></span> Access deeper self-awareness</li>
+                        <li><span class="iconify" data-icon="lucide:check" data-width="18" data-height="18"></span> Feel more grounded and emotionally free</li>
+                    </ul>
+                </div>
+
+                <!-- Practitioners Card -->
+                <div class="persona-card reveal-on-scroll">
+                    <div class="persona-icon">
+                        <span class="iconify" data-icon="lucide:briefcase" data-width="48" data-height="48"></span>
+                    </div>
+                    <h3>Practitioners & Professionals</h3>
+                    <p class="persona-subtitle">Including:</p>
+                    <div class="practitioner-tags">
+                        <span class="practitioner-tag">Therapists</span>
+                        <span class="practitioner-tag">Coaches</span>
+                        <span class="practitioner-tag">Healers</span>
+                        <span class="practitioner-tag">Energy Workers</span>
+                        <span class="practitioner-tag">Bodyworkers</span>
+                        <span class="practitioner-tag">Breathwork Facilitators</span>
+                        <span class="practitioner-tag">Somatic Guides</span>
+                        <span class="practitioner-tag">Spiritual Mentors</span>
+                    </div>
+                </div>
             </div>
 
-            <h3 style="font-size: 1.5em; margin-bottom: 20px;">And for practitioners, including…</h3>
-            <div class="custom-programs">
-                <ul>
-                    <li>Therapists</li>
-                    <li>Coaches</li>
-                    <li>Healers</li>
-                    <li>Energy workers</li>
-                    <li>Bodyworkers</li>
-                    <li>Breathwork facilitators</li>
-                    <li>Somatic guides</li>
-                    <li>Spiritual mentors</li>
-                    <li>Anyone supporting others in emotional transformation</li>
-                </ul>
-            </div>
-
-            <p style="font-size: 1.2em; margin-top: 30px;">Whether you're just beginning your personal healing or you're a seasoned practitioner, you'll leave with tools you can use immediately.</p>
+            <p class="persona-footer reveal-on-scroll">Whether you're just beginning your personal healing or you're a seasoned practitioner, you'll leave with tools you can use immediately.</p>
         </div>
     </section>
 
-    <!-- What You'll Walk Away With -->
+    <!-- Your Journey Timeline -->
     <section class="bg-light">
-        <div class="container-narrow">
-            <h2>What You'll Walk Away With</h2>
+        <div class="container">
+            <h2 style="text-align: center;">Your Journey</h2>
+            <p style="font-size: 1.2em; margin-bottom: 50px; text-align: center;">From registration to transformation — here's what to expect:</p>
 
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">✓</div>
-                    <div class="step-content">
-                        <p>A clear understanding of what the Paradox Process is</p>
+            <div class="journey-timeline">
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="timeline-icon">
+                        <span class="iconify" data-icon="lucide:edit-3" data-width="28" data-height="28"></span>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Step 1</span>
+                        <h3>Register Now</h3>
+                        <p>Save your free spot in seconds</p>
                     </div>
                 </div>
 
-                <div class="step">
-                    <div class="step-number">✓</div>
-                    <div class="step-content">
-                        <p>A live experience of how it dissolves emotional charge</p>
+                <div class="timeline-connector"></div>
+
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="timeline-icon">
+                        <span class="iconify" data-icon="lucide:mail" data-width="28" data-height="28"></span>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Step 2</span>
+                        <h3>Check Your Email</h3>
+                        <p>Get your Zoom link!</p>
                     </div>
                 </div>
 
-                <div class="step">
-                    <div class="step-number">✓</div>
-                    <div class="step-content">
-                        <p>Practical tools you can use yourself or with clients</p>
+                <div class="timeline-connector"></div>
+
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="timeline-icon">
+                        <span class="iconify" data-icon="lucide:video" data-width="28" data-height="28"></span>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Step 3</span>
+                        <h3>Join Live</h3>
+                        <p>December 10th at 8:00 PM EST</p>
                     </div>
                 </div>
 
-                <div class="step">
-                    <div class="step-number">✓</div>
-                    <div class="step-content">
-                        <p>Clarity on integrative applications</p>
-                    </div>
-                </div>
+                <div class="timeline-connector"></div>
 
-                <div class="step">
-                    <div class="step-number">✓</div>
-                    <div class="step-content">
-                        <p>Confidence in creating real, rapid emotional change</p>
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="timeline-icon highlight">
+                        <span class="iconify" data-icon="lucide:sparkles" data-width="28" data-height="28"></span>
                     </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">✓</div>
-                    <div class="step-content">
-                        <p>Insight into next steps if certification interests you</p>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Step 4</span>
+                        <h3>Transform</h3>
+                        <p>Leave with practical tools you can use immediately</p>
                     </div>
                 </div>
             </div>
+
+            <p style="text-align: center; margin-top: 40px; opacity: 0.8;"><em>Can't make it live? You'll receive the replay within 24 hours.</em></p>
         </div>
     </section>
 
     <!-- Quote -->
     <section class="quote-section">
         <div class="container">
-            <p class="quote">"We make a thousand micro-choices a day based on our negative feelings and emotions. If you're not aware of the choices you're making then you are shaping a reality that is going to keep recurring your issues and problems."</p>
-            <p class="quote-author">— Thomas M. Jones, Co-Founder, The Paradox Process</p>
+            <div class="quote-wrapper reveal-on-scroll">
+                <div class="quote-mark quote-mark-open">"</div>
+                <blockquote class="quote-text">
+                    We make a thousand micro-choices a day based on our negative feelings and emotions. If you're not aware of the choices you're making then you are shaping a reality that is going to keep recurring your issues and problems.
+                </blockquote>
+                <div class="quote-mark quote-mark-close">"</div>
+                <div class="quote-attribution">
+                    <img src="PP_Thomas_cropped.jpg" alt="Thomas M. Jones" class="quote-avatar">
+                    <div class="quote-author-info">
+                        <p class="quote-author-name">Thomas M. Jones</p>
+                        <p class="quote-author-title">Co-Founder, The Paradox Process</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -378,8 +451,10 @@
     <section id="registration-form" class="bg-light" aria-labelledby="registration-heading">
         <div class="container">
             <div class="contact-form">
-                <h2 id="registration-heading" style="text-align: center; margin-bottom: 20px;">Workshop Registration</h2>
-                <p style="text-align: center; margin-bottom: 40px;">Reserve your free spot for the December 10th workshop. You'll receive Zoom details and a reminder email before the event.</p>
+                <div class="form-header">
+                    <h2 id="registration-heading">Save Your Free Spot</h2>
+                    <p class="form-subtitle">Join us December 10th at 8:00 PM EST</p>
+                </div>
 
                 <form id="corporate-contact-form" aria-label="Workshop Registration Form" novalidate>
                     <!-- Honeypot field for spam protection -->
@@ -388,10 +463,17 @@
                         <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <div class="form-group">
-                        <label for="name">Your Name: <span class="required" aria-label="required">*</span></label>
-                        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error">
-                        <span class="error-message" id="name-error" role="alert"></span>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name: <span class="required" aria-label="required">*</span></label>
+                            <input type="text" id="first-name" name="first-name" required aria-required="true" aria-describedby="first-name-error">
+                            <span class="error-message" id="first-name-error" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name: <span class="required" aria-label="required">*</span></label>
+                            <input type="text" id="last-name" name="last-name" required aria-required="true" aria-describedby="last-name-error">
+                            <span class="error-message" id="last-name-error" role="alert"></span>
+                        </div>
                     </div>
 
                     <div class="form-group">
