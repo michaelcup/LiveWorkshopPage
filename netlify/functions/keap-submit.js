@@ -77,7 +77,7 @@ exports.handler = async (event, context) => {
           field: 'EMAIL1'
         }
       ],
-      opt_in_reason: 'Workshop registration form - December 10th Live Workshop'
+      opt_in_reason: 'Webinar registration form - February 4th Mastering The Paradox Process'
     };
 
     // Add custom fields if provided

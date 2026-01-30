@@ -7,9 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const formSuccess = document.getElementById('form-success');
     const formError = document.getElementById('form-error');
 
-    // Detect which form type we're on
-    const isWorkshopForm = !document.getElementById('organization');
-
     // Validation functions
     const validators = {
         'first-name': function(value) {
@@ -30,12 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return null;
         },
-        organization: function(value) {
-            if (!value.trim()) {
-                return 'Please enter your organization name';
-            }
-            return null;
-        },
         email: function(value) {
             if (!value.trim()) {
                 return 'Please enter your email address';
@@ -44,16 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!emailRegex.test(value)) {
                 return 'Please enter a valid email address';
             }
-            return null;
-        },
-        interest: function() {
-            const checkboxes = document.querySelectorAll('input[name="interest"]:checked');
-            if (checkboxes.length === 0) {
-                return 'Please select at least one option';
-            }
-            return null;
-        },
-        role: function() {
             return null;
         }
     };
@@ -90,23 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Clear all checkboxes error
-    function clearCheckboxError(fieldName) {
-        const checkboxes = document.querySelectorAll(`input[name="${fieldName}"]`);
-        checkboxes.forEach(checkbox => {
-            checkbox.classList.remove('error');
-            checkbox.setAttribute('aria-invalid', 'false');
-        });
-
-        const errorElement = document.getElementById(`${fieldName}-error`);
-        if (errorElement) {
-            errorElement.textContent = '';
-            errorElement.classList.remove('show');
-        }
-    }
-
     // Real-time validation for text inputs
-    ['first-name', 'last-name', 'organization', 'email'].forEach(fieldName => {
+    ['first-name', 'last-name', 'email'].forEach(fieldName => {
         const field = document.getElementById(fieldName);
         if (field) {
             field.addEventListener('blur', function() {
@@ -125,14 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-    });
-
-    // Real-time validation for checkboxes
-    const interestCheckboxes = document.querySelectorAll('input[name="interest"]');
-    interestCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            clearCheckboxError('interest');
-        });
     });
 
     // Form submission
@@ -155,10 +113,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let isValid = true;
         const errors = {};
 
-        // Validate required text fields based on form type
-        const requiredFields = isWorkshopForm
-            ? ['first-name', 'last-name', 'email']
-            : ['first-name', 'last-name', 'organization', 'email'];
+        // Validate required text fields
+        const requiredFields = ['first-name', 'last-name', 'email'];
 
         requiredFields.forEach(fieldName => {
             const field = document.getElementById(fieldName);
@@ -173,21 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-
-        // Validate checkboxes based on form type
-        if (isWorkshopForm) {
-            // No checkbox validation needed for webinar form
-        } else {
-            // Validate interest checkboxes for corporate form
-            const interestError = validators.interest();
-            if (interestError) {
-                errors.interest = interestError;
-                showError('interest', interestError);
-                isValid = false;
-            } else {
-                clearCheckboxError('interest');
-            }
-        }
 
         if (!isValid) {
             formError.style.display = 'block';
@@ -338,84 +279,39 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateCountdown, 1000);
 });
 
-// Tab Interface
-document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-
-    if (tabButtons.length === 0) return;
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Get the target panel ID
-            const targetId = this.getAttribute('aria-controls');
-
-            // Update button states
-            tabButtons.forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-selected', 'false');
-            });
-            this.classList.add('active');
-            this.setAttribute('aria-selected', 'true');
-
-            // Update panel visibility
-            tabPanels.forEach(panel => {
-                panel.classList.remove('active');
-                panel.setAttribute('hidden', '');
-            });
-
-            const targetPanel = document.getElementById(targetId);
-            if (targetPanel) {
-                targetPanel.classList.add('active');
-                targetPanel.removeAttribute('hidden');
-            }
-        });
-
-        // Keyboard navigation
-        button.addEventListener('keydown', function(e) {
-            const buttons = Array.from(tabButtons);
-            const currentIndex = buttons.indexOf(this);
-
-            let newIndex;
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                e.preventDefault();
-                newIndex = (currentIndex + 1) % buttons.length;
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                e.preventDefault();
-                newIndex = (currentIndex - 1 + buttons.length) % buttons.length;
-            } else if (e.key === 'Home') {
-                e.preventDefault();
-                newIndex = 0;
-            } else if (e.key === 'End') {
-                e.preventDefault();
-                newIndex = buttons.length - 1;
-            }
-
-            if (newIndex !== undefined) {
-                buttons[newIndex].focus();
-                buttons[newIndex].click();
-            }
-        });
-    });
-});
-
-// Scroll Reveal Animation
+// Scroll Reveal Animation with staggered delays
 document.addEventListener('DOMContentLoaded', function() {
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
     if (revealElements.length === 0) return;
 
+    // Group elements by their parent section for staggered reveal
+    const sectionGroups = new Map();
+    revealElements.forEach(element => {
+        const section = element.closest('section') || element.closest('header');
+        if (!sectionGroups.has(section)) {
+            sectionGroups.set(section, []);
+        }
+        sectionGroups.get(section).push(element);
+    });
+
+    // Assign stagger delays within each section
+    sectionGroups.forEach(elements => {
+        elements.forEach((el, index) => {
+            el.style.transitionDelay = (index * 0.08) + 's';
+        });
+    });
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('revealed');
-                // Optionally stop observing after reveal
                 revealObserver.unobserve(entry.target);
             }
         });
     }, {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -40px 0px'
     });
 
     revealElements.forEach(element => {
