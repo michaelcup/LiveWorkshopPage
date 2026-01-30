@@ -54,10 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return null;
         },
         role: function() {
-            const checkboxes = document.querySelectorAll('input[name="role"]:checked');
-            if (checkboxes.length === 0) {
-                return 'Please select at least one option';
-            }
             return null;
         }
     };
@@ -139,14 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Real-time validation for role checkboxes (workshop form)
-    const roleCheckboxes = document.querySelectorAll('input[name="role"]');
-    roleCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            clearCheckboxError('role');
-        });
-    });
-
     // Form submission
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -188,15 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Validate checkboxes based on form type
         if (isWorkshopForm) {
-            // Validate role checkboxes for workshop form
-            const roleError = validators.role();
-            if (roleError) {
-                errors.role = roleError;
-                showError('role', roleError);
-                isValid = false;
-            } else {
-                clearCheckboxError('role');
-            }
+            // No checkbox validation needed for webinar form
         } else {
             // Validate interest checkboxes for corporate form
             const interestError = validators.interest();
@@ -323,8 +303,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const countdownContainer = document.getElementById('countdown-container');
     if (!countdownContainer) return;
 
-    // Workshop date: December 10th, 2025 at 8:00 PM EST
-    const workshopDate = new Date('2025-12-10T20:00:00-05:00').getTime();
+    // Webinar date: February 4th, 2026 at 7:00 PM ET
+    const workshopDate = new Date('2026-02-04T19:00:00-05:00').getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -336,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('countdown-hours').textContent = '00';
             document.getElementById('countdown-minutes').textContent = '00';
             document.getElementById('countdown-seconds').textContent = '00';
-            document.querySelector('.countdown-label').textContent = 'Workshop is Live!';
+            document.querySelector('.countdown-label').textContent = 'Webinar is Live!';
             return;
         }
 
