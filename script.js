@@ -150,15 +150,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(form);
         const data = {};
 
-        // Process regular fields
+        // Process form fields (exclude honeypot)
         for (let [key, value] of formData.entries()) {
-            if (key === 'interest' || key === 'contact-method' || key === 'role') {
-                // Handle multiple checkboxes
-                if (!data[key]) {
-                    data[key] = [];
-                }
-                data[key].push(value);
-            } else if (key !== 'website') { // Exclude honeypot
+            if (key !== 'website') {
                 data[key] = value;
             }
         }
