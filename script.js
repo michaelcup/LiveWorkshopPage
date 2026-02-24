@@ -238,8 +238,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const countdownContainer = document.getElementById('countdown-container');
     if (!countdownContainer) return;
 
-    // Webinar date: February 4th, 2026 at 7:00 PM ET
-    const workshopDate = new Date('2026-02-04T19:00:00-05:00').getTime();
+    // Webinar date: March 18th, 2026 at 7:00 PM ET
+    const workshopDate = new Date('2026-03-18T19:00:00-04:00').getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
