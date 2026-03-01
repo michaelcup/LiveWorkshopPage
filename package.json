@@ -4,7 +4,8 @@
   "description": "Paradox Process website with Keap integration",
   "private": true,
   "dependencies": {
-    "node-fetch": "^2.6.7"
+    "@netlify/blobs": "^8.1.0",
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {},
   "scripts": {
