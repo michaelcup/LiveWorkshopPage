@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinar Admin — Paradox Process</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Match main site fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --bg-secondary: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-blue: #1D7AAF;
+            --accent-dark: #155d87;
+            --success: #34c759;
+            --warning: #ff9500;
+            --error: #ff3b30;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --shadow-soft: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.1);
+            --spring-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--bg-color);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+        .header-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .header-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+        .status-dot.live { background: var(--success); }
+        .status-dot.defaults { background: var(--warning); }
+
+        /* Layout */
+        .page-body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px 80px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+        @media (max-width: 800px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+        .card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .card-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(29, 122, 175, 0.1);
+            color: var(--accent-blue);
+        }
+        .card-body { padding: 24px; }
+
+        /* Form Controls */
+        .form-group { margin-bottom: 20px; }
+        .form-group:last-child { margin-bottom: 0; }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        label .hint {
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            opacity: 0.7;
+            margin-left: 4px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        input[type="url"],
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: var(--bg-color);
+            transition: all 0.2s var(--spring-easing);
+            -webkit-appearance: none;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(29, 122, 175, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+
+        .section-divider {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin: 28px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 980px;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s var(--spring-easing);
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(29, 122, 175, 0.35);
+        }
+        .btn-primary:hover { background: var(--accent-dark); }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        .btn-secondary:hover { background: #e8e8ed; }
+
+        /* Alerts */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 16px;
+            display: none;
+        }
+        .alert.show { display: flex; align-items: center; gap: 10px; }
+        .alert-error { background: #fff0f0; color: var(--error); }
+        .alert-success { background: #e8f5e9; color: #2e7d32; }
+
+        /* Auth Gate */
+        .auth-container {
+            max-width: 400px;
+            margin: 80px auto;
+        }
+        .auth-card {
+            text-align: center;
+        }
+        .auth-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark) 100%);
+            border-radius: 16px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        .auth-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .auth-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Preview Widget */
+        .preview-widget {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark) 100%);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            color: #fff;
+        }
+        .preview-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+        .preview-date {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        .preview-time {
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-top: 6px;
+        }
+        .preview-meta {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+        .preview-status {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .preview-status.past { color: #ffcc80; }
+        .preview-status.future { color: #a5d6a7; }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* Countdown Ring */
+        .countdown-ring-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .countdown-ring {
+            position: relative;
+            width: 140px;
+            height: 140px;
+        }
+        .countdown-ring svg {
+            transform: rotate(-90deg);
+        }
+        .countdown-ring-bg {
+            fill: none;
+            stroke: var(--bg-secondary);
+            stroke-width: 8;
+        }
+        .countdown-ring-progress {
+            fill: none;
+            stroke: var(--accent-blue);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s var(--spring-easing);
+        }
+        .countdown-ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .countdown-ring-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+        .countdown-ring-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s var(--spring-easing);
+        }
+        .quick-link:hover {
+            background: #e8e8ed;
+            transform: translateX(4px);
+        }
+        .quick-link-icon {
+            font-size: 1.1rem;
+        }
+
+        /* Hide sections */
+        #config-section { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- Auth Gate -->
+<div id="auth-section">
+    <div class="auth-container">
+        <div class="card auth-card">
+            <div class="card-body" style="padding: 40px;">
+                <div class="auth-icon">🔐</div>
+                <h1 class="auth-title">Webinar Admin</h1>
+                <p class="auth-subtitle">Enter the admin password to continue</p>
+
+                <div class="form-group" style="text-align: left;">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter password" autocomplete="current-password">
+                </div>
+
+                <button class="btn btn-primary" id="login-btn" onclick="handleLogin()" style="width: 100%;">
+                    Unlock Dashboard
+                </button>
+
+                <div class="alert alert-error" id="auth-error"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div id="config-section">
+    <header class="admin-header">
+        <div class="header-left">
+            <div class="header-logo">PP</div>
+            <div>
+                <div class="header-title">Webinar Admin</div>
+                <div class="header-subtitle">Paradox Process</div>
+            </div>
+        </div>
+        <div class="header-status">
+            <div class="status-dot" id="status-dot"></div>
+            <span id="status-text">Loading...</span>
+        </div>
+    </header>
+
+    <main class="page-body">
+        <div class="dashboard-grid">
+
+            <!-- Left Column: Form -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Webinar Details</span>
+                    <span class="card-badge">Live Editor</span>
+                </div>
+                <div class="card-body">
+
+                    <div class="section-divider">Date & Time</div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="f-date">Date</label>
+                            <input type="date" id="f-date" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label for="f-time">Start Time <span class="hint">(24h)</span></label>
+                            <input type="time" id="f-time" oninput="updatePreview()">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="f-tz">Timezone</label>
+                            <select id="f-tz" onchange="updatePreview()">
+                                <option value="-04:00">Eastern Daylight (EDT)</option>
+                                <option value="-05:00">Eastern Standard (EST)</option>
+                                <option value="-05:00">Central Daylight (CDT)</option>
+                                <option value="-06:00">Central Standard (CST)</option>
+                                <option value="-07:00">Mountain (MST)</option>
+                                <option value="-08:00">Pacific (PST)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="f-duration">Duration <span class="hint">(min)</span></label>
+                            <input type="number" id="f-duration" min="15" max="480" step="5" oninput="updatePreview()">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="f-display-time">Display Text <span class="hint">e.g. "7:00 PM Eastern"</span></label>
+                        <input type="text" id="f-display-time" placeholder="7:00 PM Eastern" oninput="updatePreview()">
+                    </div>
+
+                    <div class="section-divider">Zoom</div>
+
+                    <div class="form-group">
+                        <label for="f-zoom">Meeting URL</label>
+                        <input type="url" id="f-zoom" placeholder="https://zoom.us/j/...">
+                    </div>
+
+                    <!-- Preview -->
+                    <div class="preview-widget" style="margin-top: 28px;">
+                        <div class="preview-label">Live Preview</div>
+                        <div class="preview-date" id="prev-date">—</div>
+                        <div class="preview-time" id="prev-time">—</div>
+                        <div class="preview-meta" id="prev-meta"></div>
+                        <div class="preview-status" id="prev-status"></div>
+                    </div>
+
+                    <div style="margin-top: 24px; display: flex; gap: 12px;">
+                        <button class="btn btn-primary" id="save-btn" onclick="handleSave()">
+                            Save Changes
+                        </button>
+                        <span id="save-spinner" style="display:none; align-self: center; color: var(--text-secondary); font-size: 0.85rem;">Saving...</span>
+                    </div>
+
+                    <div class="alert alert-error" id="save-error"></div>
+                    <div class="alert alert-success" id="save-success"></div>
+                </div>
+            </div>
+
+            <!-- Right Column: Stats & Links -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+
+                <!-- Countdown -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Time Until Webinar</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="countdown-ring-container">
+                            <div class="countdown-ring">
+                                <svg width="140" height="140">
+                                    <circle class="countdown-ring-bg" cx="70" cy="70" r="62"></circle>
+                                    <circle class="countdown-ring-progress" id="countdown-progress" cx="70" cy="70" r="62"
+                                        stroke-dasharray="389.56" stroke-dashoffset="0"></circle>
+                                </svg>
+                                <div class="countdown-ring-text">
+                                    <div class="countdown-ring-value" id="countdown-value">--</div>
+                                    <div class="countdown-ring-label" id="countdown-label">days</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="stat-hours">--</div>
+                                <div class="stat-label">Hours</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="stat-mins">--</div>
+                                <div class="stat-label">Minutes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Quick Links</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-links">
+                            <a href="index.html" target="_blank" class="quick-link">
+                                <span class="quick-link-icon">🌐</span>
+                                View Live Page
+                            </a>
+                            <a href="https://keap.app" target="_blank" class="quick-link">
+                                <span class="quick-link-icon">📧</span>
+                                Keap Dashboard
+                            </a>
+                            <a href="https://app.netlify.com" target="_blank" class="quick-link">
+                                <span class="quick-link-icon">🚀</span>
+                                Netlify Deploy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    let sessionPassword = '';
+    let countdownInterval = null;
+    let webinarDate = null;
+
+    // Helpers
+    function showAlert(id, msg) {
+        const el = document.getElementById(id);
+        el.textContent = msg;
+        el.classList.add('show');
+    }
+    function hideAlert(id) {
+        document.getElementById(id).classList.remove('show');
+    }
+
+    // Derive preview fields
+    function derivePreviewFields(date, timeLocal, tzOffset, timeDisplay, durationMins) {
+        const isoStart = `${date}T${timeLocal}${tzOffset}`;
+        const [y, mo, d] = date.split('-').map(Number);
+        const utcDate = new Date(Date.UTC(y, mo - 1, d));
+
+        const displayDate = utcDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+        const displayDay = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][utcDate.getUTCDay()];
+        const isPast = Date.now() > new Date(isoStart).getTime();
+
+        return { displayDate, displayDay, isoStart, isPast };
+    }
+
+    function updatePreview() {
+        const date = document.getElementById('f-date').value;
+        const timeRaw = document.getElementById('f-time').value;
+        const tzOffset = document.getElementById('f-tz').value;
+        const display = document.getElementById('f-display-time').value.trim();
+        const duration = document.getElementById('f-duration').value;
+        const zoom = document.getElementById('f-zoom').value.trim();
+
+        if (!date || !timeRaw) {
+            document.getElementById('prev-date').textContent = '—';
+            document.getElementById('prev-time').textContent = '—';
+            return;
+        }
+
+        const timeLocal = timeRaw.length === 5 ? timeRaw + ':00' : timeRaw;
+        const { displayDate, displayDay, isoStart, isPast } = derivePreviewFields(date, timeLocal, tzOffset, display, duration);
+
+        document.getElementById('prev-date').textContent = displayDate || '—';
+        document.getElementById('prev-time').textContent = display ? `${displayDay} · ${display}` : '—';
+        document.getElementById('prev-meta').textContent = `${duration || 45} minutes${zoom ? ' · Zoom ready' : ''}`;
+
+        const statusEl = document.getElementById('prev-status');
+        if (isPast) {
+            statusEl.textContent = '⚠ Date is in the past';
+            statusEl.className = 'preview-status past';
+        } else {
+            statusEl.textContent = '✓ Upcoming';
+            statusEl.className = 'preview-status future';
+        }
+
+        // Update countdown
+        webinarDate = new Date(isoStart);
+        updateCountdown();
+    }
+
+    function updateCountdown() {
+        if (!webinarDate) return;
+
+        const now = Date.now();
+        const target = webinarDate.getTime();
+        const diff = target - now;
+
+        if (diff <= 0) {
+            document.getElementById('countdown-value').textContent = '0';
+            document.getElementById('countdown-label').textContent = 'Started';
+            document.getElementById('stat-hours').textContent = '0';
+            document.getElementById('stat-mins').textContent = '0';
+            document.getElementById('countdown-progress').style.strokeDashoffset = '389.56';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        document.getElementById('countdown-value').textContent = days;
+        document.getElementById('countdown-label').textContent = days === 1 ? 'day' : 'days';
+        document.getElementById('stat-hours').textContent = hours;
+        document.getElementById('stat-mins').textContent = mins;
+
+        // Ring progress (based on 30-day max)
+        const maxDays = 30;
+        const progress = Math.min(days / maxDays, 1);
+        const circumference = 389.56;
+        document.getElementById('countdown-progress').style.strokeDashoffset = circumference * progress;
+    }
+
+    function populateForm(config) {
+        document.getElementById('f-date').value = config.date || '';
+        document.getElementById('f-time').value = (config.timeLocal || '').substring(0, 5);
+        document.getElementById('f-tz').value = config.tzOffset || '-04:00';
+        document.getElementById('f-display-time').value = config.timeDisplay || '';
+        document.getElementById('f-duration').value = config.durationMins || 45;
+        document.getElementById('f-zoom').value = config.zoomUrl || '';
+        updatePreview();
+    }
+
+    // Auth
+    async function handleLogin() {
+        hideAlert('auth-error');
+        const password = document.getElementById('admin-password').value;
+        if (!password) { showAlert('auth-error', 'Please enter a password.'); return; }
+
+        const btn = document.getElementById('login-btn');
+        btn.disabled = true;
+        btn.textContent = 'Checking...';
+
+        try {
+            const res = await fetch('/.netlify/functions/webinar-config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'verify', password })
+            });
+            const data = await res.json();
+
+            if (!res.ok || !data.success) {
+                showAlert('auth-error', data.message || 'Incorrect password.');
+                btn.disabled = false;
+                btn.textContent = 'Unlock Dashboard';
+                return;
+            }
+
+            sessionPassword = password;
+            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('config-section').style.display = 'block';
+            loadCurrentConfig();
+
+            // Start countdown updates
+            countdownInterval = setInterval(updateCountdown, 1000);
+
+        } catch (err) {
+            showAlert('auth-error', 'Could not reach server.');
+            btn.disabled = false;
+            btn.textContent = 'Unlock Dashboard';
+        }
+    }
+
+    document.getElementById('admin-password').addEventListener('keydown', e => {
+        if (e.key === 'Enter') handleLogin();
+    });
+
+    // Load config
+    async function loadCurrentConfig() {
+        const dot = document.getElementById('status-dot');
+        const text = document.getElementById('status-text');
+
+        try {
+            const res = await fetch('/.netlify/functions/webinar-config');
+            const data = await res.json();
+
+            if (data.found && data.config) {
+                populateForm(data.config);
+                dot.className = 'status-dot live';
+                text.textContent = 'Override active';
+            } else {
+                loadDefaults();
+                dot.className = 'status-dot defaults';
+                text.textContent = 'Using defaults';
+            }
+        } catch {
+            loadDefaults();
+            dot.className = 'status-dot';
+            text.textContent = 'Offline';
+        }
+    }
+
+    function loadDefaults() {
+        fetch('config.js')
+            .then(r => r.text())
+            .then(src => {
+                const get = (key) => { const m = src.match(new RegExp(`${key}\\s*:\\s*'([^']*)'`)); return m ? m[1] : ''; };
+                const getNum = (key) => { const m = src.match(new RegExp(`${key}\\s*:\\s*(\\d+)`)); return m ? Number(m[1]) : 45; };
+                populateForm({
+                    date: get('date'),
+                    timeLocal: get('timeLocal'),
+                    tzOffset: get('tzOffset'),
+                    timeDisplay: get('timeDisplay'),
+                    durationMins: getNum('durationMins'),
+                    zoomUrl: get('zoomUrl')
+                });
+            })
+            .catch(() => {});
+    }
+
+    // Save
+    async function handleSave() {
+        hideAlert('save-error');
+        hideAlert('save-success');
+
+        const date = document.getElementById('f-date').value;
+        const timeRaw = document.getElementById('f-time').value;
+        const tzOffset = document.getElementById('f-tz').value;
+        const timeDisplay = document.getElementById('f-display-time').value.trim();
+        const durationMins = Number(document.getElementById('f-duration').value) || 45;
+        const zoomUrl = document.getElementById('f-zoom').value.trim();
+
+        if (!date) { showAlert('save-error', 'Date required'); return; }
+        if (!timeRaw) { showAlert('save-error', 'Time required'); return; }
+        if (!timeDisplay) { showAlert('save-error', 'Display text required'); return; }
+        if (!zoomUrl) { showAlert('save-error', 'Zoom URL required'); return; }
+
+        const timeLocal = timeRaw.length === 5 ? timeRaw + ':00' : timeRaw;
+        const config = { date, timeLocal, tzOffset, timeDisplay, durationMins, zoomUrl };
+
+        const btn = document.getElementById('save-btn');
+        const spinner = document.getElementById('save-spinner');
+        btn.disabled = true;
+        spinner.style.display = 'inline';
+
+        try {
+            const res = await fetch('/.netlify/functions/webinar-config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'save', password: sessionPassword, config })
+            });
+            const data = await res.json();
+
+            if (!res.ok || !data.success) {
+                showAlert('save-error', data.message || 'Save failed');
+            } else {
+                showAlert('save-success', '✓ Changes saved! Live page updated.');
+                document.getElementById('status-dot').className = 'status-dot live';
+                document.getElementById('status-text').textContent = 'Override active';
+            }
+        } catch {
+            showAlert('save-error', 'Could not reach server');
+        } finally {
+            btn.disabled = false;
+            spinner.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>

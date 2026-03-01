@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +7,6 @@
     <meta name="keywords" content="paradox process, free webinar, emotional healing, therapist training, coaching certification, wellness practitioner, breakthrough techniques, paradox fundamentals">
 
     <!-- Open Graph Meta Tags -->
-    <meta name="description" content="A free live webinar for therapists, coaches, healers, and seekers ready to break through emotional patterns that traditional methods haven't resolved.">
-
-    <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://liveworkshop.paradoxprocess.org/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Mastering The Paradox Process | Free Live Webinar">
@@ -24,239 +21,686 @@
     <meta name="twitter:description" content="A free live webinar for therapists, coaches, healers, and seekers ready to break through emotional patterns that traditional methods haven't resolved.">
     <meta name="twitter:image" content="https://liveworkshop.paradoxprocess.org/OGimage.jpg">
 
-    <title>Free Live Webinar: Mastering The Paradox Process | Discover Tools That Unlock Rapid Transformation</title>
+    <title>Mastering The Paradox Process | Free Live Training</title>
     <link rel="icon" type="image/png" href="LogoMask.png">
 
-    <!-- Preconnect for Performance -->
+    <!-- Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      "name": "Mastering The Paradox Process - Free Live Webinar",
-      "description": "A free live webinar for therapists, coaches, healers, and seekers ready to break through emotional patterns that traditional methods haven't resolved.",
-      "startDate": "2026-03-18T19:00:00-04:00",
-      "endDate": "2026-03-18T19:45:00-04:00",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-      "location": {
-        "@type": "VirtualLocation",
-        "url": "https://zoom.us/j/placeholder"
-      },
-      "organizer": {
-        "@type": "Organization",
-        "name": "The Paradox Process",
-        "url": "https://yourwebsite.com"
-      },
-      "performer": {
-        "@type": "Organization",
-        "name": "The Paradox Process"
-      },
-      "isAccessibleForFree": true,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock",
-        "url": "https://yourwebsite.com/workshop",
-        "validFrom": "2025-01-01"
+    <!-- Three.js Import Map -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js"
+        }
       }
-    }
+    </script>
+
+    <!-- Config — single source of truth for all event dates/times -->
+    <script src="config.js"></script>
+
+    <!-- Schema.org Structured Data — auto-generated from config.js -->
+    <script>
+    (function () {
+        var s = document.createElement('script');
+        s.type = 'application/ld+json';
+        s.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Event',
+            'name': 'Mastering The Paradox Process - Free Live Webinar',
+            'description': 'A free live webinar for therapists, coaches, healers, and seekers ready to break through emotional patterns that traditional methods haven\'t resolved.',
+            'startDate': WEBINAR.isoStart,
+            'endDate': WEBINAR.isoEnd,
+            'eventStatus': 'https://schema.org/EventScheduled',
+            'eventAttendanceMode': 'https://schema.org/OnlineEventAttendanceMode',
+            'location': { '@type': 'VirtualLocation', 'url': WEBINAR.zoomUrl },
+            'organizer': { '@type': 'Organization', 'name': 'The Paradox Process', 'url': 'https://paradoxprocess.org' },
+            'performer': { '@type': 'Organization', 'name': 'The Paradox Process' },
+            'isAccessibleForFree': true,
+            'offers': {
+                '@type': 'Offer',
+                'price': '0',
+                'priceCurrency': 'USD',
+                'availability': 'https://schema.org/InStock',
+                'url': 'https://liveworkshop.paradoxprocess.org/',
+                'validFrom': '2025-01-01'
+            }
+        });
+        document.currentScript.parentNode.insertBefore(s, document.currentScript);
+    }());
     </script>
 </head>
 <body>
-    <!-- Skip to Content Link for Accessibility -->
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
     <!-- Sticky Navigation Bar -->
-    <nav class="sticky-nav" id="sticky-nav" role="navigation" aria-label="Sticky navigation">
-        <div class="container sticky-nav-content">
+    <nav class="sticky-nav" id="sticky-nav" role="navigation" aria-label="Primary navigation">
+        <div class="sticky-nav-inner">
             <a href="https://courses.paradoxprocess.org/pages/about" class="back-button" aria-label="Back to About Page">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                Back
             </a>
             <a href="#registration-form" class="sticky-cta">Save Your Spot</a>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header role="banner">
-        <div class="container">
-            <div class="logo" aria-label="The Paradox Process Logo"></div>
-            <p class="eyebrow">Free Live Webinar</p>
-            <h1><span class="h1-main">Mastering<br>The Paradox Process</span><span class="h1-sub">Discover tools that unlock rapid transformation and lasting change</span></h1>
-            <p class="subtitle">For therapists, coaches, healers, and seekers ready to break through emotional patterns that traditional methods haven't resolved</p>
+    <!-- Hero Section -->
+    <header class="hero-section" role="banner">
+        <canvas id="hero-canvas"></canvas>
 
-            <!-- Countdown Timer -->
-            <div class="countdown-container" id="countdown-container">
-                <p class="countdown-label">Webinar Starts In:</p>
-                <div class="countdown-timer" id="countdown-timer">
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="countdown-days">00</span>
-                        <span class="countdown-unit">Days</span>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="countdown-hours">00</span>
-                        <span class="countdown-unit">Hours</span>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="countdown-minutes">00</span>
-                        <span class="countdown-unit">Min</span>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="countdown-seconds">00</span>
-                        <span class="countdown-unit">Sec</span>
+        <div class="hero-content fade-in-up">
+            <div class="hero-logo-mark" role="img" aria-label="Paradox Process logo — a blue circle with mirrored P letters forming PTP"></div>
+            <p class="hero-eyebrow">Free Live Training</p>
+            <h1 class="hero-title">
+                Mastering the <br>
+                <span class="text-gradient">Paradox Process.</span>
+            </h1>
+            <p class="hero-subtitle">
+                For therapists, coaches, healers, and seekers ready to break through emotional patterns that traditional methods can't resolve.
+            </p>
+
+            <!-- 3D Spatial Glass Widget -->
+            <div class="countdown-wrapper" id="tilt-wrapper">
+                <div class="glass-noise"></div>
+                <div class="glare" id="glare"></div>
+
+                <div class="live-badge">
+                    <span class="pulse-dot"></span> Live on Zoom
+                </div>
+
+                <div class="hero-date-wrapper">
+                    <div class="hero-date" id="hero-date"></div>
+                    <div class="hero-time" id="hero-time"></div>
+                </div>
+
+                <div class="countdown-container" id="countdown-container">
+                    <div class="countdown-timer" id="countdown-timer">
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-days">00</span>
+                            <span class="countdown-unit">Days</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-hours">00</span>
+                            <span class="countdown-unit">Hours</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-minutes">00</span>
+                            <span class="countdown-unit">Min</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-seconds">00</span>
+                            <span class="countdown-unit">Sec</span>
+                        </div>
                     </div>
                 </div>
-                <p class="countdown-date">March 18th • 7:00 PM ET • Live on Zoom</p>
             </div>
 
-            <a href="#registration-form" class="cta-button header-cta">Save Your Free Spot</a>
+            <!-- Volumetric CTA -->
+            <div class="cta-wrapper">
+                <div class="cta-aura"></div>
+                <a href="#registration-form" class="button-primary">Reserve Your Spot</a>
+            </div>
+
         </div>
     </header>
 
-    <!-- Group Photo -->
-    <section class="team-intro-photo" aria-label="The Paradox Process team">
+    <!-- Discovery Section -->
+    <section class="section-padding bg-grey" aria-labelledby="discover-heading">
         <div class="container">
-            <div class="team-photo-wrapper reveal-on-scroll">
-                <img src="groupphoto.jpg" alt="The Paradox Process team celebrating together" class="team-photo" loading="lazy" width="800" height="600">
-            </div>
-        </div>
-    </section>
+            <h2 id="discover-heading" class="section-title fade-on-scroll">What you'll discover.</h2>
 
-    <!-- Introduction -->
-    <section id="main-content" class="bg-light" role="main">
-        <div class="container-narrow">
-            <h2 class="section-heading reveal-on-scroll"><span class="heading-accent">Why traditional approaches</span> hit a wall — and what actually works</h2>
-            <p class="lead-text reveal-on-scroll">Join senior facilitators of the Paradox Process for a powerful 45-minute webinar that reveals why traditional therapeutic approaches, while valuable, often struggle to create lasting emotional transformation — and what actually works to shift negative feelings at their core.</p>
-
-            <p class="pullquote reveal-on-scroll">After 40 years of development and thousands of transformed lives, the Paradox Process has become known as <em>"the missing piece"</em> for professionals and individuals seeking real, measurable breakthroughs.</p>
-
-            <p class="key-statement reveal-on-scroll">In this training, you'll discover the specific tools that allow you to shift anxiety, limiting beliefs, and emotional blocks <strong>in minutes instead of months</strong> — and learn how to master them through our flagship Paradox Fundamentals program.</p>
-
-            <p class="intro-closing reveal-on-scroll">Whether you're struggling with your own emotional patterns or watching clients spin their wheels despite their best efforts, this webinar will show you a faster, deeper path forward.</p>
-        </div>
-    </section>
-
-    <!-- Photo Band — Live Workshop -->
-    <section class="photo-band" aria-label="Live workshop photo">
-        <div class="photo-band-overlay">
-            <div class="container">
-                <p class="photo-band-stat reveal-on-scroll">40 years of development. Thousands of transformed lives.</p>
-                <p class="photo-band-caption reveal-on-scroll">A live Paradox Process workshop in New York City</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- What You'll Discover -->
-    <section class="bg-white" aria-labelledby="discover-heading">
-        <div class="container-narrow">
-            <h2 id="discover-heading" class="section-heading reveal-on-scroll"><span class="heading-accent">What you'll</span> discover</h2>
-
-            <ul class="discover-list">
-                <li class="reveal-on-scroll">
-                    <strong>Negative feelings are your superpower</strong>
-                    <span class="list-detail">Unlock the profound insights hidden inside your most challenging emotions</span>
-                </li>
-                <li class="reveal-on-scroll">
-                    <strong>The fatal flaw in traditional methods</strong>
-                    <span class="list-detail">Why intellectual understanding rarely changes your nervous system — and what actually creates lasting transformation</span>
-                </li>
-                <li class="reveal-on-scroll">
-                    <strong>The 3 Core Paradox Tools</strong>
-                    <span class="list-detail">Create breakthroughs in a single session, and discover why trying to learn this on your own keeps you stuck</span>
-                </li>
-                <li class="reveal-on-scroll">
-                    <strong>Real results from real practitioners</strong>
-                    <span class="list-detail">How therapists and coaches are helping clients make more progress in weeks than they did in years</span>
-                </li>
-                <li class="reveal-on-scroll">
-                    <strong>Your invitation to Paradox Fundamentals</strong>
-                    <span class="list-detail">The first step toward mastering these life-changing tools</span>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Registration Form -->
-    <section id="registration-form" class="bg-light" aria-labelledby="registration-heading">
-        <div class="container">
-            <div class="contact-form reveal-on-scroll">
-                <div class="form-header">
-                    <h2 id="registration-heading">Save your spot</h2>
-                    <p class="form-subtitle">Join our free 45-minute webinar</p>
+            <div class="discovery-list">
+                <div class="discovery-item fade-on-scroll">
+                    <span class="discovery-number">01</span>
+                    <div class="discovery-content">
+                        <h3>Why negative feelings are your superpower</h3>
+                        <p>How to unlock the profound insights hidden inside your most challenging emotions.</p>
+                    </div>
                 </div>
 
-                <form id="corporate-contact-form" aria-label="Webinar Registration Form" novalidate>
-                    <!-- Honeypot field for spam protection -->
+                <div class="discovery-item fade-on-scroll">
+                    <span class="discovery-number">02</span>
+                    <div class="discovery-content">
+                        <h3>The fatal flaw in traditional methods</h3>
+                        <p>Why intellectual understanding rarely changes your nervous system, and what actually creates lasting emotional transformation.</p>
+                    </div>
+                </div>
+
+                <div class="discovery-item fade-on-scroll">
+                    <span class="discovery-number">03</span>
+                    <div class="discovery-content">
+                        <h3>The 3 Core Paradox Tools</h3>
+                        <p>Create breakthroughs in a single session—and why trying to learn this on your own keeps you stuck.</p>
+                    </div>
+                </div>
+
+                <div class="discovery-item fade-on-scroll">
+                    <span class="discovery-number">04</span>
+                    <div class="discovery-content">
+                        <h3>Real practitioner results</h3>
+                        <p>How therapists and coaches are helping clients make more progress in weeks than they did in years with traditional approaches alone.</p>
+                    </div>
+                </div>
+
+                <!-- Featured Callout -->
+                <div class="discovery-featured fade-on-scroll">
+                    <div class="featured-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>An exclusive opportunity</h3>
+                    </div>
+                    <p>Join Paradox Fundamentals—the first step toward mastering these life-changing tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro / Prose Section -->
+    <section class="prose-section" id="main-content" role="main">
+        <div class="prose-container">
+            <span class="prose-eyebrow fade-on-scroll">About This Webinar</span>
+            <h2 class="prose-heading fade-on-scroll">Why traditional approaches can hit a wall</h2>
+            <p class="prose-lead fade-on-scroll">Join senior facilitators of the Paradox Process for a powerful 45-minute webinar that reveals why traditional therapeutic approaches, while valuable, often struggle to create lasting emotional transformation, and what actually works to shift negative feelings at their core.</p>
+
+            <blockquote class="prose-pullquote fade-on-scroll">
+                After 40 years of development and thousands of transformed lives, the Paradox Process has become known as <em>"the missing piece"</em> for professionals and individuals seeking real, measurable breakthroughs.
+            </blockquote>
+
+            <p class="prose-body fade-on-scroll">In this training, you'll discover the specific tools that allow you to shift anxiety, limiting beliefs, and emotional blocks in minutes instead of months and learn how to master them through our flagship Paradox Fundamentals program.</p>
+            <p class="prose-body fade-on-scroll">Whether you're struggling with your own emotional patterns or watching clients spin their wheels despite their best efforts, this webinar will show you a faster, deeper path forward.</p>
+        </div>
+    </section>
+
+    <!-- Immersive Impact Container -->
+    <section class="impact-section" aria-label="Live workshop photo">
+        <div class="impact-container fade-on-scroll">
+            <div class="impact-bg" id="impact-parallax"></div>
+            <div class="impact-overlay">
+                <div class="impact-text">
+                    <h2>40 years of development.<br>Thousands of lives changed.</h2>
+                    <p>Live Paradox Process workshop &bull; New York City</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Label Registration Form -->
+    <section id="registration-form" class="section-padding registration-section" aria-labelledby="registration-heading">
+        <div class="container container-narrow">
+            <div class="form-wrapper fade-on-scroll">
+                <div class="form-header">
+                    <h2 id="registration-heading">Save your spot</h2>
+                </div>
+
+                <form class="apple-form" id="corporate-contact-form" novalidate aria-label="Webinar Registration Form">
                     <div class="honeypot" aria-hidden="true">
-                        <label for="website">Website</label>
                         <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="first-name">First Name: <span class="required" aria-label="required">*</span></label>
-                            <input type="text" id="first-name" name="first-name" required aria-required="true" aria-describedby="first-name-error">
-                            <span class="error-message" id="first-name-error" role="alert"></span>
+                    <div class="input-group">
+                        <div class="input-floating-wrapper">
+                            <input type="text" id="first-name" name="first-name" placeholder=" " required aria-required="true">
+                            <label for="first-name">First Name</label>
                         </div>
-                        <div class="form-group">
-                            <label for="last-name">Last Name: <span class="required" aria-label="required">*</span></label>
-                            <input type="text" id="last-name" name="last-name" required aria-required="true" aria-describedby="last-name-error">
-                            <span class="error-message" id="last-name-error" role="alert"></span>
+                        <div class="input-floating-wrapper">
+                            <input type="text" id="last-name" name="last-name" placeholder=" " required aria-required="true">
+                            <label for="last-name">Last Name</label>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email Address: <span class="required" aria-label="required">*</span></label>
-                        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error">
-                        <span class="error-message" id="email-error" role="alert"></span>
+                    <div class="input-group single">
+                        <div class="input-floating-wrapper">
+                            <input type="email" id="email" name="email" placeholder=" " required aria-required="true">
+                            <label for="email">Email Address</label>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="questions">What are you hoping to learn from this webinar? <em>(optional)</em></label>
-                        <textarea id="questions" name="questions"></textarea>
+                    <div class="input-group single" style="margin-bottom: 5px;">
+                        <div class="input-floating-wrapper">
+                            <textarea id="questions" name="questions" placeholder=" " rows="4"></textarea>
+                            <label for="questions">What are you hoping to learn? (optional)</label>
+                        </div>
                     </div>
 
-                    <!-- Form Messages -->
-                    <div id="form-success" class="form-message success-message" role="status" aria-live="polite">
-                        <strong>Thank you!</strong> Your registration has been confirmed!
-                    </div>
-                    <div id="form-error" class="form-message error-alert" role="alert" aria-live="assertive">
-                        <strong>Oops!</strong> There was a problem submitting your form. Please check the errors above and try again.
+                    <!-- Email consent checkbox - above the button -->
+                    <div class="consent-wrapper" style="margin: 20px 0; display: flex; align-items: center; gap: 10px; justify-content: center;">
+                        <input type="checkbox" id="email-consent" name="email-consent" required aria-required="true" style="width: 16px; height: 16px; accent-color: var(--accent-blue); cursor: pointer; flex-shrink: 0;">
+                        <label for="email-consent" style="font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;">
+                            I agree to receive webinar reminders and updates.
+                        </label>
                     </div>
 
-                    <p class="privacy-notice">
-                        <small>By registering, you agree to receive webinar details and occasional updates from The Paradox Process. We respect your privacy and will never share your information with third parties. Unsubscribe anytime.</small>
-                    </p>
-
-                    <button type="submit" class="cta-button submit-button" id="submit-button">
-                        <span class="button-text">Save Your Spot</span>
-                        <span class="button-loading">Sending...</span>
-                    </button>
+                    <div class="cta-wrapper full-width">
+                        <div class="cta-aura"></div>
+                        <button type="submit" id="submit-button" class="button-primary full-width" style="margin-top:0;">Complete Registration</button>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Apple-style Footer -->
     <footer role="contentinfo">
-        <div class="container">
-            <div class="logo" aria-label="The Paradox Process Logo"></div>
-            <p class="footer-title">The Paradox Process</p>
-            <p class="footer-tagline">Free Live Webinar &bull; Live on Zoom</p>
-            <p class="footer-copyright">&copy; 2025 Healing and Discovery, Inc. All rights reserved.</p>
+        <div class="footer-content">
+            <p>The Paradox Process is dedicated to helping individuals and practitioners achieve lasting emotional freedom. This free masterclass is an introductory session and does not constitute professional therapy or medical advice.</p>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    Copyright &copy; 2026 Healing and Discovery, Inc. All rights reserved.
+                </div>
+                <div class="footer-links">
+                    <a href="https://paradoxprocess.org/privacy">Privacy Policy</a>
+                    <a href="https://paradoxprocess.org/terms">Terms of Service</a>
+                    <a href="https://paradoxprocess.org/contact">Contact Us</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Form Validation and Interaction Script -->
+    <!-- Script Section -->
+    <script type="module">
+        import * as THREE from 'three';
+
+        // --- 1. THREE.JS 3D BACKGROUND (Volumetric Refraction) ---
+        function init3D() {
+            const canvas = document.querySelector('#hero-canvas');
+            if (!canvas) return;
+
+            const scene = new THREE.Scene();
+
+            // Lighting setup for refraction
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+            dirLight.position.set(5, 10, 5);
+            scene.add(dirLight);
+
+            const blueLight = new THREE.PointLight(0x1D7AAF, 8, 40);
+            blueLight.position.set(-5, 2, -2);
+            scene.add(blueLight);
+
+            const cyanLight = new THREE.PointLight(0x5ac8fa, 6, 30);
+            cyanLight.position.set(0, -3, -1);
+            scene.add(cyanLight);
+
+            const warmLight = new THREE.PointLight(0xff9900, 5, 30);
+            warmLight.position.set(5, 0, -2);
+            scene.add(warmLight);
+
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 6;
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Geometry
+            const geometry = new THREE.PlaneGeometry(35, 25, 100, 100);
+            const positionAttribute = geometry.attributes.position;
+            const vertexData = [];
+            for (let i = 0; i < positionAttribute.count; i++) {
+                vertexData.push({ x: positionAttribute.getX(i), y: positionAttribute.getY(i) });
+            }
+
+            // Volumetric glass simulation
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0xf0f0f5,
+                metalness: 0.1,
+                roughness: 0.25,
+                transmission: 0.5,
+                thickness: 2.0,
+                ior: 1.5,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.1,
+                side: THREE.DoubleSide
+            });
+
+            const wavePlane = new THREE.Mesh(geometry, material);
+            wavePlane.rotation.x = -Math.PI / 2.5;
+            wavePlane.position.y = -3;
+            wavePlane.position.z = -5;
+            scene.add(wavePlane);
+
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                // Fluid Math
+                for (let i = 0; i < positionAttribute.count; i++) {
+                    const data = vertexData[i];
+                    const z = Math.sin(data.x * 0.25 + elapsedTime * 0.4) * 0.8 +
+                              Math.cos(data.y * 0.20 + elapsedTime * 0.3) * 0.8;
+                    positionAttribute.setZ(i, z);
+                }
+
+                positionAttribute.needsUpdate = true;
+                geometry.computeVertexNormals();
+
+                // Orbiting Lights
+                blueLight.position.x = Math.sin(elapsedTime * 0.2) * 12;
+                blueLight.position.z = Math.cos(elapsedTime * 0.2) * 6;
+                cyanLight.position.x = Math.sin(elapsedTime * 0.15) * -8;
+                warmLight.position.x = Math.cos(elapsedTime * 0.3) * 10;
+                warmLight.position.z = Math.sin(elapsedTime * 0.3) * 5;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // --- 2. SCROLL ANIMATIONS ---
+        function initScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-on-scroll');
+            if (elements.length === 0) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            elements.forEach((el, index) => {
+                el.style.transitionDelay = (index % 3) * 0.1 + 's';
+                observer.observe(el);
+            });
+
+            const impactBg = document.getElementById('impact-parallax');
+            if (impactBg) {
+                window.addEventListener('scroll', () => {
+                    const rect = impactBg.parentElement.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        // Centered parallax: 0 offset when container is
+                        // mid-viewport, shifts symmetrically as it enters/exits.
+                        const containerMid = rect.top + rect.height / 2;
+                        const viewportMid = window.innerHeight / 2;
+                        const offset = (viewportMid - containerMid) * 0.08;
+                        impactBg.style.transform = `translateY(${offset}px)`;
+                    }
+                }, { passive: true });
+            }
+        }
+
+        // --- 3. FORM VALIDATION & HANDLING ---
+        function initFormHandling() {
+            const form = document.querySelector('.apple-form');
+            if (!form) return;
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const consentCheckbox = form.querySelector('#email-consent');
+            const inputs = {
+                firstName: form.querySelector('input[name="first-name"]'),
+                lastName: form.querySelector('input[name="last-name"]'),
+                email: form.querySelector('input[name="email"]')
+            };
+
+            const validators = {
+                firstName: (val) => val && val.trim().length >= 2 ? null : 'Required',
+                lastName: (val) => val && val.trim().length >= 2 ? null : 'Required',
+                email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) ? null : 'Invalid email'
+            };
+
+            const toggleError = (input, msg) => {
+                if (!input) return;
+                input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+            };
+
+            Object.keys(inputs).forEach(key => {
+                const field = inputs[key];
+                if (field) {
+                    field.addEventListener('blur', () => toggleError(field, validators[key](field.value)));
+                    field.addEventListener('input', () => toggleError(field, null));
+                }
+            });
+
+            // Track submission state to prevent double-submits
+            let isSubmitting = false;
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Debounce: Prevent double-submission
+                // If we're already processing a submission, ignore this click
+                if (isSubmitting) {
+                    console.log('Submission already in progress, ignoring duplicate');
+                    return;
+                }
+                isSubmitting = true;
+
+                const honeypot = document.getElementById('website');
+                if (honeypot && honeypot.value !== '') {
+                    isSubmitting = false;
+                    return;
+                }
+
+                let isValid = true;
+                Object.keys(inputs).forEach(key => {
+                    const field = inputs[key];
+                    const error = validators[key](field.value);
+                    if (error) { toggleError(field, error); isValid = false; }
+                });
+
+                // Validate GDPR consent checkbox
+                if (!consentCheckbox.checked) {
+                    consentCheckbox.style.outline = '2px solid #ff3b30';
+                    isValid = false;
+                } else {
+                    consentCheckbox.style.outline = 'none';
+                }
+
+                if (!isValid) {
+                    isSubmitting = false;
+                    return;
+                }
+
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Processing...";
+
+                // Collect all form data including optional questions field
+                const formData = new FormData(form);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    if (key !== 'website') data[key] = value;
+                }
+
+                // Include the webinar date from config for dynamic tag generation
+                data.webinarDate = WEBINAR.date;
+
+                try {
+                    const response = await fetch('/.netlify/functions/keap-submit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.status === 200 && result.success) {
+                        // Full success
+                        submitBtn.textContent = "You're Registered!";
+                        submitBtn.style.backgroundColor = "#34c759";
+                        form.reset();
+                    } else if (response.status === 202 && result.partialSuccess) {
+                        // Partial success - registered but email might not send
+                        submitBtn.textContent = "Registered!";
+                        submitBtn.style.backgroundColor = "#ff9500"; // Orange warning
+                        form.reset();
+                        // Show the warning message to the user
+                        alert(result.message);
+                    } else {
+                        throw new Error(result.message || "Registration failed");
+                    }
+
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    submitBtn.textContent = "Error - Try Again";
+                    submitBtn.style.backgroundColor = "#ff3b30";
+
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                        submitBtn.style.backgroundColor = "";
+                        isSubmitting = false; // Re-enable form submission
+                    }, 4000);
+                }
+            });
+        }
+
+        // --- 0. POPULATE HERO DATE/TIME FROM CONFIG ---
+        function initHeroDate() {
+            const dateEl = document.getElementById('hero-date');
+            const timeEl = document.getElementById('hero-time');
+            if (dateEl) dateEl.textContent = WEBINAR.displayDate;
+            if (timeEl) timeEl.textContent = WEBINAR.displayDay + ' \u2022 ' + WEBINAR.timeDisplay;
+        }
+
+        // --- 4. COUNTDOWN TIMER ---
+        function initCountdown() {
+            const container = document.getElementById('countdown-container');
+            if (!container) return;
+
+            const workshopDate = new Date(WEBINAR.isoStart).getTime();
+
+            function update() {
+                const now = new Date().getTime();
+                const distance = workshopDate - now;
+
+                if (distance < 0) {
+                    document.getElementById('countdown-timer').innerHTML = '<span style="font-weight:600; font-size: 1.2em; color: var(--text-primary);">Webinar is Live!</span>';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+
+            setInterval(update, 1000);
+            update();
+        }
+
+        // --- 5. 3D CSS TILT EFFECT & GLARE ---
+        function initTiltEffect() {
+            const wrapper = document.getElementById('tilt-wrapper');
+            const glare = document.getElementById('glare');
+            if (!wrapper) return;
+
+            const MAX_TILT = 7;
+            let targetRotX = 0, targetRotY = 0;
+            let currentRotX = 0, currentRotY = 0;
+            let rafId = null;
+
+            function animateTilt() {
+                const dx = targetRotX - currentRotX;
+                const dy = targetRotY - currentRotY;
+                currentRotX += dx * 0.09;
+                currentRotY += dy * 0.09;
+                wrapper.style.transform = `perspective(1100px) rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+                if (Math.abs(dx) > 0.01 || Math.abs(dy) > 0.01) {
+                    rafId = requestAnimationFrame(animateTilt);
+                } else {
+                    rafId = null;
+                }
+            }
+
+            function startAnim() {
+                if (!rafId) rafId = requestAnimationFrame(animateTilt);
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 768) return;
+
+                const rect = wrapper.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+
+                // Normalise cursor position relative to widget centre (-1 to 1)
+                const nx = (e.clientX - cx) / (rect.width * 0.6);
+                const ny = (e.clientY - cy) / (rect.height * 0.6);
+                const clamped = (v) => Math.max(-1, Math.min(1, v));
+
+                targetRotY =  clamped(nx) * MAX_TILT;
+                targetRotX = -clamped(ny) * MAX_TILT;
+                startAnim();
+
+                if (glare) {
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const near = e.clientX > rect.left - 90 && e.clientX < rect.right + 90 &&
+                                 e.clientY > rect.top  - 90 && e.clientY < rect.bottom + 90;
+                    if (near) {
+                        glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 60%)`;
+                        glare.style.opacity = '1';
+                    } else {
+                        glare.style.opacity = '0';
+                    }
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                targetRotX = 0;
+                targetRotY = 0;
+                startAnim();
+                if (glare) glare.style.opacity = '0';
+            });
+        }
+
+        // Initialize Everything
+        window.addEventListener('DOMContentLoaded', () => {
+            initHeroDate();
+            try { init3D(); } catch (e) { console.warn("3D Failed", e); }
+            initScrollAnimations();
+            initFormHandling();
+            initCountdown();
+            initTiltEffect();
+
+            // Async config override: fetch any admin-saved values from Netlify Blobs.
+            // The static config.js defaults are already painted above; this silently
+            // updates the display if an override exists — no flash, no blocking.
+            fetch('/.netlify/functions/webinar-config')
+                .then(r => r.json())
+                .then(data => {
+                    if (!data.found) return;
+                    Object.assign(WEBINAR, data.config);
+                    deriveWebinarFields();
+                    initHeroDate();
+                    initCountdown(); // restarts with updated date
+                })
+                .catch(() => { /* no override or offline — silently use defaults */ });
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

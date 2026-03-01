@@ -2,7 +2,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('corporate-contact-form');
     const submitButton = document.getElementById('submit-button');
+    // The new design uses an inline form handler. Only run this handler
+    // when the legacy button-text/button-loading markup is present.
+    if (!form || !submitButton) return;
     const buttonText = submitButton.querySelector('.button-text');
+    if (!buttonText) return;
     const buttonLoading = submitButton.querySelector('.button-loading');
     const formSuccess = document.getElementById('form-success');
     const formError = document.getElementById('form-error');
@@ -230,47 +234,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Sticky Navigation - Always visible (no scroll behavior needed)
-// The sticky nav is now always visible at the top of the page
-
-// Countdown Timer
+// Sticky Navigation — adds frosted-glass depth on scroll
 document.addEventListener('DOMContentLoaded', function() {
-    const countdownContainer = document.getElementById('countdown-container');
-    if (!countdownContainer) return;
+    const nav = document.getElementById('sticky-nav');
+    if (!nav) return;
 
-    // Webinar date: March 18th, 2026 at 7:00 PM ET
-    const workshopDate = new Date('2026-03-18T19:00:00-04:00').getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = workshopDate - now;
-
-        // If the countdown is finished
-        if (distance < 0) {
-            document.getElementById('countdown-days').textContent = '00';
-            document.getElementById('countdown-hours').textContent = '00';
-            document.getElementById('countdown-minutes').textContent = '00';
-            document.getElementById('countdown-seconds').textContent = '00';
-            document.querySelector('.countdown-label').textContent = 'Webinar is Live!';
-            return;
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
         }
-
-        // Calculate time units
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Update the display with leading zeros
-        document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
-        document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
-    }
-
-    // Update immediately and then every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    }, { passive: true });
 });
 
 // Scroll Reveal Animation with staggered delays
