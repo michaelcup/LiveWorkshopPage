@@ -33,10 +33,11 @@ const KEAP_API_BASE = 'https://api.infusionsoft.com/crm/rest/v1';
  * @param {string} contactData.lastName - Last name
  * @param {string} contactData.email - Email address
  * @param {string} [contactData.questions] - Optional questions/comments
+ * @param {string} [contactData.webinarDate] - Webinar date in ISO format (e.g., "2026-03-18")
  * @returns {Promise<{id: number}>} Contact object with ID
  */
 async function createOrUpdateContact(accessToken, contactData) {
-  const { firstName, lastName, email, questions } = contactData;
+  const { firstName, lastName, email, questions, webinarDate } = contactData;
 
   console.log('createOrUpdateContact called for:', email);
 
@@ -66,12 +67,20 @@ async function createOrUpdateContact(accessToken, contactData) {
     opt_in_reason: 'Webinar registration form - Mastering The Paradox Process',
   };
 
-  // Add questions to custom field if provided (using KEAP_QUESTIONS_FIELD_ID env var)
+  // Add custom fields if provided
+  const customFields = [];
+
   const questionsFieldId = process.env.KEAP_QUESTIONS_FIELD_ID;
   if (questions && questionsFieldId) {
-    payload.custom_fields = [
-      { id: parseInt(questionsFieldId), content: questions }
-    ];
+    customFields.push({ id: parseInt(questionsFieldId), content: questions });
+  }
+
+  if (webinarDate) {
+    customFields.push({ id: 339, content: webinarDate });
+  }
+
+  if (customFields.length > 0) {
+    payload.custom_fields = customFields;
   }
 
   let contact;
@@ -404,6 +413,7 @@ async function integrateWithKeap(data) {
       lastName,
       email,
       questions,
+      webinarDate,
     });
     logger.setContactId(contact.id);
     logger.log('Contact created/updated successfully', { contactId: contact.id });

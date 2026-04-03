@@ -2,10 +2,10 @@
 // WEBINAR CONFIG — only edit this file to reschedule the event
 // =============================================================
 const WEBINAR = {
-    date:         '2026-03-18',      // YYYY-MM-DD  (Eastern Time date)
-    timeLocal:    '19:00:00',        // 24-hour format, Eastern Time
+    date:         '2026-04-22',      // YYYY-MM-DD  (Eastern Time date)
+    timeLocal:    '12:00:00',        // 24-hour format, Eastern Time
     tzOffset:     '-04:00',          // EDT = -04:00  |  EST = -05:00
-    timeDisplay:  '7:00 PM Eastern', // Human-readable time shown on page
+    timeDisplay:  '12:00 PM Eastern', // Human-readable time shown on page
     durationMins: 45,
     zoomUrl:      'https://us06web.zoom.us/j/88302784507'
 };
