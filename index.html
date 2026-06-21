@@ -45,9 +45,10 @@
     <!-- Config — single source of truth for all event dates/times -->
     <script src="config.js"></script>
 
-    <!-- Schema.org Structured Data — auto-generated from config.js -->
+    <!-- Schema.org Structured Data — auto-generated from config.js when a future webinar is configured -->
     <script>
     (function () {
+        if (WEBINAR.isPast || WEBINAR.waitlist) return;
         var s = document.createElement('script');
         s.type = 'application/ld+json';
         s.textContent = JSON.stringify({
@@ -85,7 +86,7 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
                 Back
             </a>
-            <a href="#registration-form" class="sticky-cta">Save Your Spot</a>
+            <a href="#registration-form" class="sticky-cta" id="sticky-cta">Save Your Spot</a>
         </div>
     </nav>
 
@@ -95,7 +96,7 @@
 
         <div class="hero-content fade-in-up">
             <div class="hero-logo-mark" role="img" aria-label="Paradox Process logo — a blue circle with mirrored P letters forming PTP"></div>
-            <p class="hero-eyebrow">Free Live Training</p>
+            <p class="hero-eyebrow" id="hero-eyebrow">Free Live Training</p>
             <h1 class="hero-title">
                 Mastering the <br>
                 <span class="text-gradient">Paradox Process.</span>
@@ -110,7 +111,7 @@
                 <div class="glare" id="glare"></div>
 
                 <div class="live-badge">
-                    <span class="pulse-dot"></span> Live on Zoom
+                    <span class="pulse-dot"></span> <span id="live-badge-text">Live on Zoom</span>
                 </div>
 
                 <div class="hero-date-wrapper">
@@ -146,7 +147,7 @@
             <!-- Volumetric CTA -->
             <div class="cta-wrapper">
                 <div class="cta-aura"></div>
-                <a href="#registration-form" class="button-primary">Reserve Your Spot</a>
+                <a href="#registration-form" class="button-primary" id="primary-cta">Reserve Your Spot</a>
             </div>
 
         </div>
@@ -447,6 +448,10 @@
         }
 
         // --- 3. FORM VALIDATION & HANDLING ---
+        function isWaitlistMode() {
+            return WEBINAR.waitlist === true || WEBINAR.isPast === true;
+        }
+
         function initFormHandling() {
             const form = document.querySelector('.apple-form');
             if (!form) return;
@@ -529,8 +534,12 @@
                     if (key !== 'website') data[key] = value;
                 }
 
-                // Include the webinar date from config for dynamic tag generation
-                data.webinarDate = WEBINAR.date;
+                if (isWaitlistMode()) {
+                    data.waitlist = 'true';
+                } else {
+                    // Include the webinar date from config for dynamic tag generation.
+                    data.webinarDate = WEBINAR.date;
+                }
 
                 try {
                     const response = await fetch('/.netlify/functions/keap-submit', {
@@ -543,7 +552,7 @@
 
                     if (response.status === 200 && result.success) {
                         // Full success
-                        submitBtn.textContent = "You're Registered!";
+                        submitBtn.textContent = isWaitlistMode() ? "You're on the List!" : "You're Registered!";
                         submitBtn.style.backgroundColor = "#34c759";
                         form.reset();
                     } else if (response.status === 202 && result.partialSuccess) {
@@ -573,17 +582,72 @@
         }
 
         // --- 0. POPULATE HERO DATE/TIME FROM CONFIG ---
+        function applyWebinarMode() {
+            const waitlist = isWaitlistMode();
+            const text = waitlist
+                ? {
+                    eyebrow: 'Free Webinar',
+                    badge: 'Next date coming soon',
+                    sticky: 'Join Waitlist',
+                    primary: 'Join the Waitlist',
+                    heading: 'Join the waitlist',
+                    submit: 'Join the Waitlist'
+                }
+                : {
+                    eyebrow: 'Free Live Training',
+                    badge: 'Live on Zoom',
+                    sticky: 'Save Your Spot',
+                    primary: 'Reserve Your Spot',
+                    heading: 'Save your spot',
+                    submit: 'Complete Registration'
+                };
+
+            const updates = [
+                ['hero-eyebrow', text.eyebrow],
+                ['live-badge-text', text.badge],
+                ['sticky-cta', text.sticky],
+                ['primary-cta', text.primary],
+                ['registration-heading', text.heading],
+                ['submit-button', text.submit]
+            ];
+
+            updates.forEach(([id, value]) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = value;
+            });
+        }
+
         function initHeroDate() {
             const dateEl = document.getElementById('hero-date');
             const timeEl = document.getElementById('hero-time');
+            applyWebinarMode();
+
+            if (isWaitlistMode()) {
+                if (dateEl) dateEl.textContent = 'Next live date';
+                if (timeEl) timeEl.textContent = 'Coming soon';
+                return;
+            }
+
             if (dateEl) dateEl.textContent = WEBINAR.displayDate;
             if (timeEl) timeEl.textContent = WEBINAR.displayDay + ' \u2022 ' + WEBINAR.timeDisplay;
         }
 
         // --- 4. COUNTDOWN TIMER ---
+        let countdownInterval = null;
+
         function initCountdown() {
             const container = document.getElementById('countdown-container');
             if (!container) return;
+
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+
+            if (isWaitlistMode()) {
+                document.getElementById('countdown-timer').innerHTML = '<span style="font-weight:600; font-size: 1.05em; color: var(--text-primary);">Registration will reopen when the next webinar is scheduled.</span>';
+                return;
+            }
 
             const workshopDate = new Date(WEBINAR.isoStart).getTime();
 
@@ -607,7 +671,7 @@
                 document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
             }
 
-            setInterval(update, 1000);
+            countdownInterval = setInterval(update, 1000);
             update();
         }
 

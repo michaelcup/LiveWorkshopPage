@@ -18,11 +18,55 @@
  * ═══════════════════════════════════════════════════════════════════════════
  */
 
-const { integrateWithKeap } = require('./shared/keap-helpers');
+const {
+  applyTagsToContact,
+  createOrUpdateContact,
+  createTag,
+  integrateWithKeap,
+} = require('./shared/keap-helpers');
+
+async function integrateWaitlistWithKeap(data) {
+  const accessToken = process.env.KEAP_ACCESS_TOKEN;
+  if (!accessToken) {
+    throw new Error('Keap Personal Access Token not configured');
+  }
+
+  const contact = await createOrUpdateContact(accessToken, {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    questions: data.questions,
+  });
+
+  const waitlistTag = await createTag(accessToken, 'Webinar - Waitlist');
+  const tagResults = await applyTagsToContact(
+    accessToken,
+    contact.id,
+    [waitlistTag.id],
+    [],
+    new Map([[waitlistTag.id, waitlistTag.name]])
+  );
+
+  return {
+    success: tagResults.applied.length > 0 && !tagResults.criticalFailure,
+    partialSuccess: tagResults.applied.length > 0 && tagResults.failed.length > 0,
+    contactId: contact.id,
+    tagging: {
+      total: 1,
+      applied: tagResults.applied.length,
+      failed: tagResults.failed.length,
+      failedTags: tagResults.failed,
+    },
+    statusMessage: tagResults.failed.length
+      ? 'Waitlist contact saved, but the waitlist tag could not be applied.'
+      : 'Waitlist contact saved successfully.',
+  };
+}
 
 // Allowed origins for CORS - only these domains can submit forms
 const ALLOWED_ORIGINS = [
   'https://liveworkshop.paradoxprocess.org',
+  'https://liveworkshop.netlify.app',
   'http://localhost:8888',  // Netlify Dev
   'http://localhost:3000',  // Local development
 ];
@@ -157,8 +201,10 @@ exports.handler = async (event, context) => {
     // Update data with normalized email
     data.email = email;
 
-    // Validate webinar date is provided
-    if (!data.webinarDate) {
+    const isWaitlist = data.waitlist === true || data.waitlist === 'true';
+
+    // Validate webinar date is provided unless this is a no-date waitlist lead.
+    if (!isWaitlist && !data.webinarDate) {
       return {
         statusCode: 400,
         headers,
@@ -168,17 +214,22 @@ exports.handler = async (event, context) => {
 
     console.log('Processing webinar registration:', {
       email: data.email,
-      webinarDate: data.webinarDate
+      webinarDate: data.webinarDate,
+      waitlist: isWaitlist
     });
 
-    // Use the integrated Keap helper with dynamic tags
-    const result = await integrateWithKeap({
+    const payload = {
       firstName: data['first-name'],
       lastName: data['last-name'],
       email: data.email,
       questions: data.questions || null,
       webinarDate: data.webinarDate,
-    });
+    };
+
+    // Scheduled webinars use the dated automation; no-date leads use a waitlist tag.
+    const result = isWaitlist
+      ? await integrateWaitlistWithKeap(payload)
+      : await integrateWithKeap(payload);
 
     if (!result.success) {
       // Check if it's a partial success (contact created but some tags failed)
