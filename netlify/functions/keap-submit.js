@@ -66,6 +66,7 @@ async function integrateWaitlistWithKeap(data) {
 // Allowed origins for CORS - only these domains can submit forms
 const ALLOWED_ORIGINS = [
   'https://liveworkshop.paradoxprocess.org',
+  'https://webinar.paradoxprocess.org',
   'https://liveworkshop.netlify.app',
   'http://localhost:8888',  // Netlify Dev
   'http://localhost:3000',  // Local development
